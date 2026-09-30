@@ -1,0 +1,8 @@
+{
+  "name": "Remix Savoria Dining \u0026 Hotel",
+  "description": "Luxury restaurant \u0026 hotel menu chart, online ordering, real-time table reservations, and secure payment processing with AI Sommelier.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Guest profile and contact details.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "displayName", "email"]
+    },
+    "Reservation": {
+      "title": "Reservation",
+      "description": "Table reservation for luxury dining at Savoria.",
+      "type": "object",
+      "properties": {
+        "reservationCode": { "type": "string" },
+        "userId": { "type": "string" },
+        "guestName": { "type": "string" },
+        "guestPhone": { "type": "string" },
+        "guestEmail": { "type": "string" },
+        "date": { "type": "string" },
+        "timeSlot": { "type": "string" },
+        "guestCount": { "type": "number" },
+        "tableNumber": { "type": "number" },
+        "zone": { "type": "string" },
+        "specialRequests": { "type": "string" },
+        "occasion": { "type": "string" },
+        "status": { "type": "string", "enum": ["CONFIRMED", "SEATED", "CANCELLED"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["reservationCode", "userId", "guestName", "date", "timeSlot", "guestCount", "status"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Dining or room service order placed by a guest.",
+      "type": "object",
+      "properties": {
+        "orderCode": { "type": "string" },
+        "userId": { "type": "string" },
+        "guestName": { "type": "string" },
+        "orderType": { "type": "string" },
+        "destination": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "taxAmount": { "type": "number" },
+        "tipAmount": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "paymentType": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "transactionRef": { "type": "string" },
+        "orderStatus": { "type": "string" },
+        "itemsSummary": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderCode", "userId", "grandTotal", "orderStatus", "paymentStatus"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document."
+    },
+    "/users/{userId}/reservations/{reservationId}": {
+      "schema": { "$ref": "#/entities/Reservation" },
+      "description": "User dining table reservations."
+    },
+    "/users/{userId}/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "User dining and room service orders."
+    }
+  }
+}
